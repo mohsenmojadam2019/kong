@@ -30,6 +30,7 @@ lua_shared_dict kong_core_db_cache_2        ${{MEM_CACHE_SIZE}};
 lua_shared_dict kong_core_db_cache_miss_2   12m;
 lua_shared_dict kong_db_cache_2             ${{MEM_CACHE_SIZE}};
 lua_shared_dict kong_db_cache_miss_2        12m;
+lua_shared_dict wrpc_channel_dict           5m;
 > end
 > if database == "cassandra" then
 lua_shared_dict kong_cassandra              5m;

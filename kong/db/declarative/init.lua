@@ -566,6 +566,8 @@ local function remove_nulls(tbl)
   return tbl
 end
 
+declarative.remove_nulls = remove_nulls
+
 
 function declarative.get_current_hash()
   return ngx.shared.kong:get(DECLARATIVE_HASH_KEY)

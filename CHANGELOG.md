@@ -65,6 +65,13 @@
 
 ### Fixes
 
+#### Core
+
+- Target entities using hostnames were resolved when they were not needed. Now
+  when a target is removed or updated, the DNS record associated with it is
+  removed from the list of hostnames to be resolved.
+  [#8497](https://github.com/Kong/kong/pull/8497)
+
 #### Plugins
 
 - **AWS-Lambda**: Fixed incorrect behavior when configured to use an http proxy

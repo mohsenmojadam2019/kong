@@ -73,6 +73,13 @@
 - Bumped resty.openssl from 0.8.5 to 0.8.6
   [#8545](https://github.com/Kong/kong/pull/8545)
 
+### Fixes
+
+#### Core
+
+- Fix issue where the Go plugin server instance would not be updated after
+a restart (e.g., upon a plugin server crash).
+  [#8547](https://github.com/Kong/kong/pull/8547)
 
 ## [2.8.0]
 

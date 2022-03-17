@@ -499,7 +499,7 @@ server {
     access_log off;
     location / {
         content_by_lua_block {
-          require("kong.events.broker").run()
+          require("resty.events.broker").run()
         }
     }
 }

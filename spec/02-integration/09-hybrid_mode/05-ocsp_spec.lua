@@ -110,6 +110,8 @@ for _, strategy in helpers.each_strategy() do
           cluster_ca_cert = "spec/fixtures/ocsp_certs/ca.crt",
         }))
 
+        set_ocsp_status("revoked")
+
         assert(helpers.start_kong({
           role = "data_plane",
           database = "off",
@@ -124,7 +126,7 @@ for _, strategy in helpers.each_strategy() do
           cluster_ca_cert = "spec/fixtures/ocsp_certs/ca.crt",
         }))
 
-        set_ocsp_status("revoked")
+        
       end)
 
       lazy_teardown(function()
@@ -132,7 +134,7 @@ for _, strategy in helpers.each_strategy() do
         helpers.stop_kong()
       end)
 
-      it("revoked DP certificate can not connect to CP", function()
+      it("revoked DP certificate can not connect to CP #only", function()
         helpers.wait_until(function()
           local logs = pl_file.read(TEST_CONF.prefix .. "/" .. TEST_CONF.proxy_error_log)
           if logs:find([[client certificate was revoked: failed to validate OCSP response: certificate status "revoked" in the OCSP response]], 1, true) then
@@ -144,6 +146,8 @@ for _, strategy in helpers.each_strategy() do
             local res = assert(admin_client:get("/clustering/data-planes"))
             local body = assert.res_status(200, res)
             local json = cjson.decode(body)
+
+            print(body)
 
             assert.equal(0, #json.data)
             return true
